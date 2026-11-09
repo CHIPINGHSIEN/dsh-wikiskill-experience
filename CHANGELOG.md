@@ -4,6 +4,18 @@ All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); the package follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-11-09
+
+First release published to the npm registry, and the first one carrying full
+distribution metadata.
+
+### Added
+
+- `author` field.
+- README: both distribution channels (npm package vs GitHub pinned commit),
+  per-endpoint network constraints for pushing and installing, and the npm
+  publishing prerequisites.
+
 ## [0.1.0] - 2026-11-09
 
 First public release. Host-only Cordis bundle for DeepSeek Harness; no Client

@@ -59,13 +59,13 @@ plugin_manager action=install_bundle target="git+https://github.com/CHIPINGHSIEN
 > ```
 > 上面的 `git+https` 形式在能访问 `github.com` 的网络上是标准写法，本机无法验证。
 
-### 方式 D：从 npm 安装（**尚未发布**）
+### 方式 D：从 npm 安装
 
 ```
-plugin_manager action=install_bundle target="dsh-wikiskill-experience@0.1.0" registry="https://registry.npmjs.org/"
+plugin_manager action=install_bundle target="dsh-wikiskill-experience" registry="https://registry.npmjs.org/"
 ```
 
-> 包还没有发到 npm（前置条件见 §11）；这条路径在发布之前装不上。
+不写版本号装 latest；要可复现就写 `dsh-wikiskill-experience@<version>`。
 
 ### 装完怎么确认
 
@@ -209,14 +209,14 @@ DSH 插件有两条真实分发路径，DSH 都能装：
 
 社区收录走 `awesome-dsh-plugin` 列表聚合（自动抓 GitHub 上带 `dsh-plugin` topic 的项目，再人工复核后收录），**收录不代表安全审查**。
 
-### 两条渠道的实施状态（2026-11-09）
+### 两条渠道各自管什么
 
-| 渠道 | 状态 | 落地内容 |
-|---|---|---|
-| **git**（GitHub 直装） | ✅ **已发布** | 公开仓库 [CHIPINGHSIEN/dsh-wikiskill-experience](https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience)，`main` = `ca7fa71`，tag `v0.1.0`，topics 含 `dsh-plugin`（市场爬虫按 topic 发现）；已实测 `plugin_manager install_bundle` 从固定 commit 安装成功（`application: applied`，工具在线） |
-| **npm** | ⏳ 未发布 | 清单已就绪、包名可用，唯一缺的是 **npm 账号认证**（见下）；认证后一条 `npm publish` 即可 |
+| 渠道 | 安装 target | 适合谁 | 怎么升级 |
+|---|---|---|---|
+| **git**（GitHub 直装） | `git+https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience#<sha>` | 想看到源码、固定 commit、不依赖任何 registry | 手工换成新 commit |
+| **npm** | `dsh-wikiskill-experience@<version>` + registry | 一条命令装、按 semver 收更新 | `plugin_manager` 的 update / `listVersions` |
 
-双渠道并存不冲突：npm 包负责"能 semver 升级 / 市场索引可自动读版本"，git 仓库负责"源码可见、可固定 commit、不依赖任何 registry"。市场索引按包名一条记录，同一个包通常只会展示其中一个来源。
+两者不冲突：git 仓库是源码与历史，npm 包是可升级的制品。市场索引按包名一条记录，同一个包通常只会展示其中一个来源。
 
 ### 本机网络约束（实测，会影响你复制命令）
 

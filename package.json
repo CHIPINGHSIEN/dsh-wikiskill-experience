@@ -1,6 +1,7 @@
 {
   "name": "dsh-wikiskill-experience",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "author": "jdfwork",
   "description": "Compiles agent experience across sessions and projects into a persistent wiki, injects a short descriptive index into later sessions, and adds an evidence-gated procedural loop that never self-publishes.",
   "keywords": [
     "dsh",
