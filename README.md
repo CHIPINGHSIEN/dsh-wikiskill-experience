@@ -53,6 +53,12 @@ plugin_manager action=install_bundle target="git+https://github.com/CHIPINGHSIEN
 
 不给 `#<commit-sha>` 就用默认分支 HEAD（不推荐：内容会随仓库变动）。固定 commit 才是可复现的安装，市场索引里的 git 条目也是这个形态。
 
+> **本机（`github.com:443` 不通）请用 SSH/443 等价形式**，已实测装通：
+> ```
+> plugin_manager action=install_bundle target="git+ssh://git@ssh.github.com:443/CHIPINGHSIEN/dsh-wikiskill-experience.git#ca7fa719b62cdf6be1a25e5d005ba1f7ecde7db1"
+> ```
+> 上面的 `git+https` 形式在能访问 `github.com` 的网络上是标准写法，本机无法验证。
+
 ### 方式 D：从 npm 安装（**尚未发布**）
 
 ```
@@ -207,10 +213,20 @@ DSH 插件有两条真实分发路径，DSH 都能装：
 
 | 渠道 | 状态 | 落地内容 |
 |---|---|---|
-| **git**（GitHub 直装） | ✅ **已发布** | 公开仓库 [CHIPINGHSIEN/dsh-wikiskill-experience](https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience)，tag `v0.1.0`，topics 含 `dsh-plugin`（市场爬虫按 topic 发现）；已实测从 `git+https://...#<sha>` 安装成功 |
+| **git**（GitHub 直装） | ✅ **已发布** | 公开仓库 [CHIPINGHSIEN/dsh-wikiskill-experience](https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience)，`main` = `ca7fa71`，tag `v0.1.0`，topics 含 `dsh-plugin`（市场爬虫按 topic 发现）；已实测 `plugin_manager install_bundle` 从固定 commit 安装成功（`application: applied`，工具在线） |
 | **npm** | ⏳ 未发布 | 清单已就绪、包名可用，唯一缺的是 **npm 账号认证**（见下）；认证后一条 `npm publish` 即可 |
 
 双渠道并存不冲突：npm 包负责"能 semver 升级 / 市场索引可自动读版本"，git 仓库负责"源码可见、可固定 commit、不依赖任何 registry"。市场索引按包名一条记录，同一个包通常只会展示其中一个来源。
+
+### 本机网络约束（实测，会影响你复制命令）
+
+| 目标 | 结果 |
+|---|---|
+| `api.github.com:443`（gh CLI 走这个） | ✅ 通 |
+| `ssh.github.com:443` | ✅ 通，且已有 SSH key 完成认证 |
+| `github.com:443`（git over HTTPS 走这个） | ❌ 20 秒超时，**不通** |
+
+所以：**推送**用 SSH/443（仓库 remote 已设为 `ssh://git@ssh.github.com:443/CHIPINGHSIEN/dsh-wikiskill-experience.git`）；**安装**时 `git+https://github.com/...` 在本机会卡住，等价可用的形式是 `git+ssh://git@ssh.github.com:443/...#<sha>`。市场索引里记录的 canonical 形式是 `git+https://github.com/...`——那在能访问 `github.com` 的网络上是标准形式，本机无法验证，不要把两者混为一谈。
 
 ### 前置条件
 
