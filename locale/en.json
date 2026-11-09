@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "WikiSkill experience",
+    "description": "Compiles agent experience across sessions and projects into a persistent wiki, and injects a short descriptive index into later sessions."
+  }
+}

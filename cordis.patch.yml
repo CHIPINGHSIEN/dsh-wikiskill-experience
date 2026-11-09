@@ -1,0 +1,26 @@
+# Bundle patch for dsh-wikiskill-experience (Host-only, no Client half).
+#
+# One Loader row. Every value below is the shipped default; override per user
+# in the profile's cordis.patch.yml (an override replaces the COMPLETE config,
+# so copy the whole block when changing a single field).
+- insert:
+    - id: wikiskill-experience
+      name: 'dsh-wikiskill-experience'
+      config:
+        # '' = <DSH_HOME>/experience/wiki ; or an absolute path
+        root: ''
+        enabled: true
+        injectSection: true
+        mirrorProjectLayer: false
+        maxIndexLines: 12
+        topN: 8
+        # Loop 2 (P2 proposals / P3 release). P2 is dry-run only and the
+        # eligibility gate is never bypassed; P3 publication requires the
+        # literal approvalToken "USER-APPROVED" from the user's own message.
+        p2Enabled: true
+        p2MinCases: 20
+        p2MinRepeat: 5
+        p2MinScenes: 3
+        p3Enabled: true
+        # '' = <DSH_HOME>/skills (watched skill root, hot-reload on write)
+        p3SkillRoot: ''

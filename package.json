@@ -1,0 +1,57 @@
+{
+  "name": "dsh-wikiskill-experience",
+  "version": "0.1.0",
+  "description": "Compiles agent experience across sessions and projects into a persistent wiki, injects a short descriptive index into later sessions, and adds an evidence-gated procedural loop that never self-publishes.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "cordis",
+    "agent-experience",
+    "skill-evolution",
+    "persistent-memory",
+    "wiki",
+    "self-improvement"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience.git"
+  },
+  "homepage": "https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience#readme",
+  "bugs": {
+    "url": "https://github.com/CHIPINGHSIEN/dsh-wikiskill-experience/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "tools/*.mjs"
+  ],
+  "scripts": {
+    "check": "node --check index.js",
+    "verify": "node tools/verify.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
